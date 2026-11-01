@@ -55,6 +55,8 @@ export interface Translation {
 export interface Example {
   text: string;
   translation?: string | null;
+  /** Latin-script rendering, for learners who cannot yet read the native script. */
+  roman?: string | null;
   ref?: string | null;
 }
 
@@ -92,6 +94,8 @@ export interface Lexeme {
   class?: string | null;
   gender?: string | null;
   stems?: Record<string, string | string[]> | null;
+  /** Alternative spellings of this lemma (e.g. δυο for δύο). */
+  variants?: string[] | null;
   /** Derived property, never a hand-maintained flag. */
   irregular?: boolean | null;
   senses?: Sense[] | null;
@@ -110,6 +114,8 @@ export interface Cell {
   /** true = linguistically absent, as opposed to missing data. */
   absent?: boolean | null;
   note?: string | null;
+  /** Rule that produced this cell when it was derived rather than attested. */
+  derived?: string | null;
   irregular?: boolean | null;
   reviewed?: ReviewMark | null;
 }

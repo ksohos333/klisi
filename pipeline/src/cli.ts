@@ -1,10 +1,13 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { fetchSource, readLock } from "./lock.js";
-import { parseUnimorphFile } from "./unimorph.js";
+import { parseUnimorphFile, type ParsedCorpus } from "./unimorph.js";
+import { ingestKaikki } from "./ingest-kaikki.js";
 import { emitArtifact } from "./emit.js";
 import { validateCorpus } from "./validate.js";
 import { applyCorrections, parseCorrections } from "./corrections.js";
+import { derivePeriphrases } from "./derive.js";
+import { mergeAlternativeSpellings } from "./alternatives.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(here, "../..");
@@ -15,22 +18,38 @@ const limitArg = args.find((a) => a.startsWith("--limit="))?.split("=")[1];
 const limit = limitArg ? Number(limitArg) : null;
 const offline = args.includes("--offline");
 
-const SOURCE_BY_LANG: Record<string, string> = {
-  el: "unimorph-ell",
+/**
+ * Source priority is inverted after measurement: kaikki (expanded Wiktionary
+ * tables) is the spine for Modern Greek; UniMorph is a supplementary source.
+ * See docs/PHASE1-DATA.md.
+ */
+const DEFAULT_SOURCE: Record<string, string> = {
+  el: "kaikki-greek",
   grc: "unimorph-grc",
   en: "unimorph-eng",
 };
+const sourceArg = args.find((a) => a.startsWith("--source="))?.split("=")[1];
+const sourceKey = sourceArg ?? DEFAULT_SOURCE[lang];
 
 async function main(): Promise<void> {
-  const key = SOURCE_BY_LANG[lang];
-  if (!key) throw new Error(`no UniMorph source configured for lang=${lang}`);
+  if (!sourceKey) throw new Error(`no source configured for lang=${lang}`);
 
   const lock = readLock(repoRoot);
-  const spec = lock.sources[key]!;
-  const file = await fetchSource(repoRoot, key, { offline });
+  const spec = lock.sources[sourceKey];
+  if (!spec) throw new Error(`unknown source: ${sourceKey}`);
+
+  const file = await fetchSource(repoRoot, sourceKey, { offline });
   console.log(`ingesting ${spec.name} from ${file}`);
 
-  const corpus = parseUnimorphFile(file, lang, key);
+  let corpus: ParsedCorpus;
+  if (sourceKey.startsWith("kaikki")) {
+    const { corpus: c, stats } = await ingestKaikki(file, lang, sourceKey);
+    corpus = c;
+    console.log(`kaikki stats: ${JSON.stringify(stats)}`);
+  } else {
+    corpus = parseUnimorphFile(file, lang, sourceKey);
+  }
+
   if (limit) {
     corpus.lexemes = corpus.lexemes.slice(0, limit);
     const keep = new Set(corpus.lexemes.map((l) => l.id));
@@ -41,6 +60,15 @@ async function main(): Promise<void> {
   console.log(
     `parsed: ${corpus.lexemes.length} lemmas, ${corpus.forms.length} surfaces, ` +
       `${corpus.skipped} skipped lines`,
+  );
+
+  const merged = mergeAlternativeSpellings(corpus);
+  console.log(`alternatives: ${merged.merged} entries merged into ${merged.groups} canonical lemmas`);
+
+  const derived = derivePeriphrases(corpus);
+  console.log(
+    `derived: ${derived.futureCells} future, ${derived.subjunctiveCells} subjunctive, ` +
+      `${derived.perfectCells} perfect cells`,
   );
 
   const corrections = parseCorrections(path.join(repoRoot, "corrections", `${lang}.jsonl`));

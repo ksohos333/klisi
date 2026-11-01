@@ -148,13 +148,16 @@ export class SearchIndex {
       score,
     });
 
-    // Stage 1 — exact surface match.
-    let hits = entries.filter((p) => p.entry.surface === q).map((p) => hit(p, 1));
-    if (hits.length) return hits;
+    // Stages 1 and 2 form one canonical-match stage: "find this word, ignoring
+    // case and accent". Exact matches rank first, but an exact match on one
+    // spelling must not hide the accented spelling of a different lemma.
+    const exact = entries.filter((p) => p.entry.surface === q).map((p) => hit(p, 1));
+    const normalized = entries.filter((p) => p.normalized === nq).map((p) => hit(p, 2));
+    if (exact.length || normalized.length) {
+      return dedupe([...exact, ...normalized]);
+    }
 
-    // Stage 2 — normalized match (case, accent, final sigma).
-    hits = entries.filter((p) => p.normalized === nq).map((p) => hit(p, 2));
-    if (hits.length) return hits;
+    let hits: SearchHit[];
 
     // Stage 3 — phonetic fold (heard-spelling confusions).
     if (cfg.search.folds.length > 0) {

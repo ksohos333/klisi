@@ -46,12 +46,13 @@ for (const c of vectors.cases) {
       `expected stage ${c.expectStage}, got ${winningStage} (${JSON.stringify(hits)})`,
     );
 
-    // Rule 1: no hit may come from a later stage than the winning one.
+    // Rule 1: no hit may come from a later stage than the winning one, except
+    // that stages 1 and 2 are a single canonical-match stage.
+    const maxAllowed = c.expectStage === 1 ? 2 : c.expectStage;
     for (const h of hits) {
-      assert.equal(
-        h.stage,
-        c.expectStage,
-        `hit ${h.lemmaId} came from stage ${h.stage}, expected ${c.expectStage}`,
+      assert.ok(
+        h.stage <= maxAllowed,
+        `hit ${h.lemmaId} came from stage ${h.stage}, expected at most ${maxAllowed}`,
       );
     }
 

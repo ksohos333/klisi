@@ -28,15 +28,24 @@ One large, focused application in the spirit of SpanishDict, built for people te
   and a TypeScript reference implementation. Kotlin and Go clients must pass the
   same vectors.
 - `pipeline` — pinned, hash-verified ingestion (`sources.lock.json`), a paradigm
-  validator, and an artifact emitter with a 50 MB size budget.
+  validator, periphrastic-tense derivation, an alternatives merger, and an
+  artifact emitter with a 50 MB size budget.
 - `artifacts/` — generated packs (not committed).
 
-Verified on real data: the Modern Greek pack builds from the pinned UniMorph
-source (11,971 lexemes, 218,403 surfaces, **2.65 MB**), the validator passes, and
-25/25 accent-stripped queries resolve to the right lemma. The same diagnostic
-also caught that UniMorph's Greek set covers only **54% of core vocabulary**, so
-Greek Wiktionary is now the primary source — see
-[docs/PHASE1-DATA.md](docs/PHASE1-DATA.md).
+Verified on real data (2026-11-01):
+
+- Modern Greek pack: **85,425 lexemes, 492,741 surfaces, 12.0 MB**, 0 schema
+  errors, 39 gaps — all genuinely irregular verbs (πρέπει, πρόκειται, άγχομαι).
+- **24/24** high-frequency core lemmas present; **25/25** accent-stripped
+  queries resolve to the right lemma.
+- The periphrastic tenses the source tables omit are derived and labelled:
+  42,563 future, 30,185 subjunctive, 21,168 perfect cells. Attested forms are
+  never overwritten.
+- 69 tests pass, including 27 shared search vectors that the Kotlin and Go
+  clients must also pass.
+
+See [docs/PHASE1-DATA.md](docs/PHASE1-DATA.md) for the measurements that decided
+the source strategy, including why UniMorph alone was not usable.
 
 ```
 pnpm install

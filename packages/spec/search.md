@@ -23,6 +23,24 @@ produces at least one hit.** Do not merge hits from later stages.
 Rationale: a stage-2 accent-insensitive match is a better answer than a stage-6
 fuzzy match, and mixing them buries the right answer under noise.
 
+### Exception: stages 1 and 2 are one canonical-match stage
+
+Stages 1 (exact) and 2 (normalized) express **one intent** — "find this word,
+ignoring case and accent" — so they are evaluated together:
+
+- Collect exact matches and normalized matches.
+- If either is non-empty, return the union, exact matches first.
+- The reported stage is **1** when at least one exact match exists, otherwise **2**.
+  Individual hits keep their own stage (1 for exact, 2 for normalized), so a
+  client can still tell them apart.
+
+Rationale: without this, an exact match on an unaccented spelling shadows the
+accented spelling of a *different* lemma. Typing `δυο` must reach `δύο`
+("two") as well as `δυο` ("pair"); short-circuiting at stage 1 would make the
+accented word unreachable.
+
+All other stages short-circuit strictly.
+
 ## Rule 2 — Normalization is applied to both sides
 
 `normalize(s)`:

@@ -54,7 +54,7 @@ export interface ParsedCorpus {
   lexemes: Lexeme[];
   paradigms: Paradigm[];
   /** surface -> lemmaId, for reverse analysis of an inflected query. */
-  forms: Array<{ surface: string; lemmaId: string; features: string }>;
+  forms: Array<{ surface: string; lemmaId: string; features: string; roman?: string | null }>;
   skipped: number;
 }
 

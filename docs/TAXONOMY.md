@@ -36,6 +36,30 @@ owner before it ships.
 > **Στιγμιαίος is the perfective past** (έγραψα). Learners routinely invert these.
 > The UI must explain this pair explicitly rather than just label it.
 
+### Verified against the source tables
+
+The mapping above is not a guess. It was checked against the extracted Greek
+Wiktionary tables for γράφω, which yield exactly this set of cells:
+
+| Features | Label | Example | Provenance |
+|---|---|---|---|
+| IPFV;PRS | Ενεστώτας | γράφω | attested |
+| IPFV;PST | Αόριστος | έγραφα | attested |
+| PFV;PST | Στιγμιαίος | έγραψα | attested |
+| PFV;SBJV | Συντακτικός αορίστου | να γράψω | attested (`dependent`) |
+| IPFV;FUT | Μέλλοντας | θα γράφω | derived (θα + ενεστώτας) |
+| PFV;FUT | Μέλλοντας στιγμιαίος | θα γράψω | derived (θα + αορ. υποτ.) |
+| IPFV;SBJV | Συντακτικός ενεστώτα | να γράφω | derived (να + ενεστώτας) |
+| IPFV;IMP | Προστακτικός | γράφε | attested |
+| PFV;IMP | Προστακτικός αορίστου | γράψε | attested |
+| PRF;PRS | Παρακείμενος | έχω γράψει | derived (έχω + απαρ. αορίστου) |
+| PRF;PST | Υπερσυντέλικος | είχα γράψει | derived (είχα + απαρ. αορίστου) |
+| PRF;FUT | Μέλλοντας συντελεσμένος | θα έχω γράψει | derived (θα + παρακείμενος) |
+
+The periphrastic rows are derived because the source tables do not enumerate
+them. Each derived cell carries `derived: "<rule>"`, so a reviewer can tell
+generated from attested at a glance, and an attested cell is never overwritten.
+
 ### Notes on the mapping
 
 - `PFV;PRS` exists for some verbs (the "perfective present", e.g. γράψω as a

@@ -66,6 +66,14 @@ export async function fetchSource(
           `Delete ${dest} and re-run with --pin to accept the new upstream content deliberately.`,
       );
     }
+    if (!spec.sha256) {
+      // Pre-seeded cache (e.g. a dump fetched out of band): pin it now so later
+      // builds are reproducible too.
+      spec.sha256 = actual;
+      spec.retrievedAt = new Date().toISOString();
+      writeLock(repoRoot, lock);
+      console.log(`pinned ${key} sha256=${actual}`);
+    }
     return dest;
   }
 

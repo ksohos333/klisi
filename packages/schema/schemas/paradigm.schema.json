@@ -37,6 +37,7 @@
             "description": "true when this cell is linguistically absent, as opposed to missing data"
           },
           "note": { "type": ["string", "null"] },
+          "derived": { "type": ["string", "null"] },
           "irregular": { "type": ["boolean", "null"] },
           "reviewed": {
             "type": ["object", "null"],

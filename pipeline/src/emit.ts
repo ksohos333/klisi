@@ -46,7 +46,9 @@ export function emitArtifact(
   );
   write(
     "forms.tsv.gz",
-    corpus.forms.map((f) => `${f.surface}\t${f.lemmaId}\t${f.features}`).join("\n") + "\n",
+    corpus.forms
+      .map((f) => `${f.surface}\t${f.lemmaId}\t${f.features}\t${f.roman ?? ""}`)
+      .join("\n") + "\n",
   );
 
   const manifest: Manifest = {

@@ -14,6 +14,10 @@
     { "lemmaId": "el:noun:μητέρα", "lang": "el", "surface": "μητέρα", "romanization": "mitera" },
     { "lemmaId": "el:noun:παιδί", "lang": "el", "surface": "παιδί", "romanization": "pedi" },
     { "lemmaId": "el:particle:που", "lang": "el", "surface": "που", "romanization": "pu" },
+    { "lemmaId": "el:num:δύο", "lang": "el", "surface": "δύο", "romanization": "dýo" },
+    { "lemmaId": "el:num:δύο", "lang": "el", "surface": "δυο", "romanization": "dyo" },
+    { "lemmaId": "el:noun:δύο", "lang": "el", "surface": "δύο", "romanization": "dýo" },
+    { "lemmaId": "el:noun:δυο", "lang": "el", "surface": "δυο", "romanization": "dyo" },
     { "lemmaId": "en:verb:write", "lang": "en", "surface": "write" },
     { "lemmaId": "en:verb:go", "lang": "en", "surface": "go" },
     { "lemmaId": "en:noun:child", "lang": "en", "surface": "child" },
@@ -160,6 +164,21 @@
       "expectStage": 7,
       "expectLemmas": ["el:verb:γράφω", "el:verb:γράφομαι"],
       "expectFirst": "el:verb:γράφω"
+    },
+    {
+      "id": "unaccented-query-reaches-accented-homograph",
+      "lang": "el",
+      "query": "δυο",
+      "expectStage": 1,
+      "expectLemmas": ["el:num:δύο", "el:noun:δυο", "el:noun:δύο"],
+      "note": "δύο and δυο are different words. Typing the unaccented spelling must reach both, not just the exact match."
+    },
+    {
+      "id": "accented-query-reaches-unaccented-homograph",
+      "lang": "el",
+      "query": "δύο",
+      "expectStage": 1,
+      "expectLemmas": ["el:num:δύο", "el:noun:δύο", "el:noun:δυο"]
     },
     {
       "id": "no-match-garbage",

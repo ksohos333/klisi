@@ -39,9 +39,9 @@
       "url": "https://kaikki.org/dictionary/Greek/kaikki.org-dictionary-Greek.jsonl",
       "license": "CC BY-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "sha256": null,
-      "retrievedAt": null,
-      "comment": "~221 MB. Senses, translations, examples. Assert whether this file also contains grc entries before relying on it."
+      "sha256": "6a6a930ef6fd2a011ccebda89c82ca73bb62456cd026cea583358c216aa173d7",
+      "retrievedAt": "2026-11-01T09:28:35.319Z",
+      "comment": "~221 MB. Senses, translations, examples. Verified 2026-11-01: this file is 100% lang_code 'el' — it contains no Ancient Greek."
     },
     "elwiktionary-dump": {
       "lang": "el",

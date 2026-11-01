@@ -64,19 +64,27 @@ Exit criteria:
 ## Phase 1 — Modern Greek pipeline
 
 Ingest, each pinned by SHA256 in `sources.lock.json` (source priority was
-**inverted after measurement** — see `docs/PHASE1-DATA.md`):
+**determined by measurement** — see `docs/PHASE1-DATA.md`):
 
-1. **el.wiktionary dump — primary.** Lemma list, `{{el-κλίσ-'X'|...}}` stem
-   tuples, `{{el-κλίση-'X'}}` declension classes, `{{ΔΦΑ}}` IPA, `{{συλλ}}`
-   syllabification, `{{el-ρήμα}}` headword specs including aorist overrides.
-   UniMorph `ell` covers only 54% of core vocabulary; Wiktionary covers all of it.
-2. **UniMorph `ell` — supplementary.** Feature-tagged forms for lemmas Wiktionary
-   also has, and a cross-check on feature assignment. Not a spine.
-3. **kaikki Greek** → senses, translations, example sentences.
+1. **kaikki Greek — primary.** 85,425 entries, 100% Modern Greek, with
+   already-expanded declension and conjugation tables, so we get attested
+   surface forms per feature cell without reimplementing Wiktionary's Lua
+   morphology modules. Also carries senses, glosses, example sentences with
+   translations, IPA, hyphenation and headword templates.
+2. **UniMorph `ell` — supplementary.** Feature-tagged forms for lemmas both
+   sources have, and a cross-check on feature assignment. Not a spine: it covers
+   only 54% of core vocabulary.
+3. **el.wiktionary dump — on demand.** Not needed for the spine. Consulted for
+   the stem tuple behind a paradigm, and for corrections the tables cannot
+   express.
 
 The ingest must handle **several** template families, not just `el-κλίσ-*`, and
 must report per-family coverage. `pipeline/core-vocab.el.txt` is the coverage
 alarm: a source below the bar is never promoted to primary.
+
+Derived periphrases (future, subjunctive, perfect) are computed in the
+pipeline from cells the source does provide, each marked with the rule that
+produced it. An attested cell is never overwritten.
 
 Model:
 
@@ -103,6 +111,11 @@ Native review:
 
 Exit: every verb and noun class has ≥2 native-verified exemplars; zero
 unexplained gaps; corrections pipeline proven end-to-end.
+
+**Status (2026-11-01):** pipeline complete and measured. 85,425 lexemes,
+492,741 surfaces, 12.0 MB pack, 0 schema errors, 39 gaps (all genuinely
+irregular verbs). 24/24 core vocabulary. Awaiting the native-speaker review
+batch and the web app (Phase 2).
 
 ## Phase 2 — Web app core
 

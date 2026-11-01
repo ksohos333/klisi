@@ -8,8 +8,8 @@
   "properties": {
     "id": {
       "type": "string",
-      "pattern": "^[a-z]{2,3}:[a-z]+:.+$",
-      "description": "Stable id: <lang>:<pos>:<lemma>"
+      "pattern": "^[a-z]{2,3}:[a-z_]+:.+$",
+      "description": "Stable id: <lang>:<pos>:<lemma>. The lemma part may contain any characters; the POS part is a lowercase token."
     },
     "lang": { "type": "string", "pattern": "^[a-z]{2,3}$" },
     "lemma": { "type": "string", "minLength": 1 },
@@ -23,6 +23,11 @@
       "type": ["object", "null"],
       "description": "Stem tuple. Verbs: present/aorist/participle. Nouns: stem variants.",
       "additionalProperties": { "type": ["string", "array"] }
+    },
+    "variants": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "Alternative spellings of this lemma."
     },
     "irregular": {
       "type": ["boolean", "null"],
@@ -58,6 +63,7 @@
               "properties": {
                 "text": { "type": "string" },
                 "translation": { "type": ["string", "null"] },
+                "roman": { "type": ["string", "null"] },
                 "ref": { "type": ["string", "null"] }
               }
             }

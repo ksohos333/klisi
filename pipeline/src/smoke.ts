@@ -61,6 +61,9 @@ for (const lemmaId of candidates) {
   if (stripped === surface) continue; // only exercise the accent-stripping path
   const hits = index.search(lang, stripped);
   checked++;
+  // The lemma must be among the hits. A query may legitimately return several
+  // homographs (δύο "two" and δυο "pair" are different words), so we assert
+  // membership, not uniqueness.
   const found = hits.some((h) => h.lemmaId === lemmaId && h.stage <= 3);
   if (!found) {
     failures++;
