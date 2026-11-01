@@ -1,0 +1,3 @@
+# Modern Greek verified corrections. One JSON object per line; see README.md.
+# Example:
+# {"lemmaId":"el:verb:γράφω","features":{"aspect":"PFV","tense":"PST","person":"1","number":"SG"},"action":"replace","wrong":"έγραφα","correct":"έγραψα","source":"native speaker","reviewer":"@ksohos333","at":"2026-11-01"}

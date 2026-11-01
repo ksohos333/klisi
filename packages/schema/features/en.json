@@ -1,0 +1,56 @@
+{
+  "lang": "en",
+  "name": "English",
+  "endonym": "English",
+  "script": "Latn",
+  "pos": ["verb", "noun", "adj"],
+  "axes": {
+    "form": {
+      "label": { "el": "Μορφή", "en": "Form" },
+      "values": {
+        "BASE": { "el": "απαρέμφατο", "en": "base form" },
+        "3SG": { "el": "γ΄ ενικό ενεστώτα", "en": "3rd person singular" },
+        "PST": { "el": "αόριστος", "en": "past" },
+        "PTCP.PST": { "el": "μετοχή παρακειμένου", "en": "past participle" },
+        "PTCP.PRS": { "el": "μετοχή ενεστώτα", "en": "present participle" }
+      }
+    },
+    "number": {
+      "label": { "el": "Αριθμός", "en": "Number" },
+      "values": {
+        "SG": { "el": "ενικός", "en": "singular" },
+        "PL": { "el": "πληθυντικός", "en": "plural" }
+      }
+    },
+    "degree": {
+      "label": { "el": "Βαθμός", "en": "Degree" },
+      "values": {
+        "AB": { "el": "θετικός", "en": "positive" },
+        "CMPR": { "el": "συγκριτικός", "en": "comparative" },
+        "SPRL": { "el": "υπερθετικός", "en": "superlative" }
+      }
+    }
+  },
+  "grids": {
+    "verb": {
+      "groupBy": [],
+      "columns": ["form"]
+    },
+    "noun": {
+      "groupBy": [],
+      "columns": ["number"]
+    },
+    "adj": {
+      "groupBy": [],
+      "columns": ["degree"]
+    }
+  },
+  "tenseLabels": {},
+  "teachingNotes": {},
+  "search": {
+    "stripCombining": true,
+    "finalSigmaFold": false,
+    "folds": [],
+    "romanization": {}
+  }
+}

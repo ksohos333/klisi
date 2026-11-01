@@ -1,0 +1,60 @@
+name: Report a conjugation error
+description: Tell us about a wrong or missing form in a paradigm
+title: "[conjugation] "
+labels: ["content", "conjugation"]
+body:
+  - type: input
+    id: lemma
+    attributes:
+      label: Lemma
+      description: The dictionary form, e.g. γράφω or άνθρωπος
+      placeholder: γράφω
+    validations:
+      required: true
+  - type: dropdown
+    id: lang
+    attributes:
+      label: Language
+      options:
+        - Modern Greek (el)
+        - Ancient Greek (grc)
+        - English (en)
+    validations:
+      required: true
+  - type: input
+    id: cell
+    attributes:
+      label: Which cell is wrong?
+      description: "Tense / person / number / voice for verbs, case / number / gender for nouns"
+      placeholder: "Στιγμιαίος, 1st person singular, active"
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What does the site show now?
+      placeholder: "e.g. it shows γράφομαι where it should show γράφτηκα"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should it show?
+      placeholder: The correct form
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source
+      description: "A printed grammar, a textbook, a native speaker, another dictionary. 'I am a native speaker' is a valid source."
+      placeholder: "Native speaker, or: Θεοδωράκη, Εισαγωγή στη Γραμματική, p. 42"
+    validations:
+      required: true
+  - type: checkboxes
+    id: regression
+    attributes:
+      label: Regression test
+      options:
+        - label: I would like this to become a permanent regression test
+          required: false

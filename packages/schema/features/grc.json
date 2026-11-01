@@ -1,0 +1,74 @@
+{
+  "lang": "grc",
+  "name": "Ancient Greek",
+  "endonym": "Ἑλληνική",
+  "script": "Grek",
+  "pos": ["verb", "noun", "adj"],
+  "axes": {
+    "case": {
+      "label": { "el": "Πτώση", "en": "Case" },
+      "values": {
+        "NOM": { "el": "ονομαστική", "en": "nominative" },
+        "GEN": { "el": "γενική", "en": "genitive" },
+        "DAT": { "el": "δοτική", "en": "dative" },
+        "ACC": { "el": "αιτιατική", "en": "accusative" },
+        "VOC": { "el": "κλητική", "en": "vocative" }
+      }
+    },
+    "number": {
+      "label": { "el": "Αριθμός", "en": "Number" },
+      "values": {
+        "SG": { "el": "ενικός", "en": "singular" },
+        "DU": { "el": "δυϊκός", "en": "dual" },
+        "PL": { "el": "πληθυντικός", "en": "plural" }
+      }
+    },
+    "gender": {
+      "label": { "el": "Γένος", "en": "Gender" },
+      "values": {
+        "MASC": { "el": "αρσενικό", "en": "masculine" },
+        "FEM": { "el": "θηλυκό", "en": "feminine" },
+        "NEUT": { "el": "ουδέτερο", "en": "neuter" }
+      }
+    },
+    "degree": {
+      "label": { "el": "Βαθμός", "en": "Degree" },
+      "values": {
+        "AB": { "el": "θετικός", "en": "positive" },
+        "CMPR": { "el": "συγκριτικός", "en": "comparative" },
+        "SPRL": { "el": "υπερθετικός", "en": "superlative" }
+      }
+    }
+  },
+  "grids": {
+    "noun": {
+      "groupBy": ["gender"],
+      "columns": ["case", "number"]
+    },
+    "adj": {
+      "groupBy": ["degree", "gender"],
+      "columns": ["case", "number"]
+    }
+  },
+  "tenseLabels": {},
+  "teachingNotes": {
+    "polytonic": {
+      "el": "Τα αρχαία ελληνικά γράφονται πολυτονικά: προσπαθείτε να γράψετε με πνεύματα και τόνους, ή αναζητήστε χωρίς αυτά.",
+      "en": "Ancient Greek is polytonic: breathings and accents are significant. Search also works with them stripped."
+    }
+  },
+  "search": {
+    "stripCombining": true,
+    "finalSigmaFold": true,
+    "folds": [
+      ["αι", "ε"],
+      ["ει", "ι"],
+      ["οι", "ι"],
+      ["υι", "ι"],
+      ["ου", "υ"],
+      ["η", "ι"],
+      ["ω", "ο"]
+    ],
+    "romanization": {}
+  }
+}

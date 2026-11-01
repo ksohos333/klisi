@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "note": "Every upstream input is pinned by SHA256. A build is only reproducible when these hashes match. Update deliberately, never automatically.",
+  "cacheDir": "/tmp/klisi-cache",
+  "sources": {
+    "unimorph-ell": {
+      "lang": "el",
+      "name": "UniMorph Modern Greek (ell)",
+      "url": "https://raw.githubusercontent.com/unimorph/ell/master/ell",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "sha256": "68f71b889fa29d31d975ebbc29f9f0f1b3a2dd6cca4f40a21b2c06f443811941",
+      "retrievedAt": "2026-11-01T08:32:53.795Z",
+      "comment": "lemma \\t form \\t features. Features are aspect-first (IPFV/PFV/PRF), person, number, case, gender."
+    },
+    "unimorph-grc": {
+      "lang": "grc",
+      "name": "UniMorph Ancient Greek (grc)",
+      "url": "https://raw.githubusercontent.com/unimorph/grc/master/grc",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "sha256": null,
+      "retrievedAt": null,
+      "comment": "Nouns and adjectives only. This dataset contains NO Ancient Greek verbs."
+    },
+    "unimorph-eng": {
+      "lang": "en",
+      "name": "UniMorph English (eng)",
+      "url": "https://raw.githubusercontent.com/unimorph/eng/master/eng",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "sha256": null,
+      "retrievedAt": null,
+      "comment": "English morphology. Used by the English lane (Phase 4)."
+    },
+    "kaikki-greek": {
+      "lang": "el",
+      "name": "kaikki.org Greek dictionary (Wiktextract)",
+      "url": "https://kaikki.org/dictionary/Greek/kaikki.org-dictionary-Greek.jsonl",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sha256": null,
+      "retrievedAt": null,
+      "comment": "~221 MB. Senses, translations, examples. Assert whether this file also contains grc entries before relying on it."
+    },
+    "elwiktionary-dump": {
+      "lang": "el",
+      "name": "Greek Wiktionary pages-articles dump",
+      "url": "https://dumps.wikimedia.org/elwiktionary/latest/elwiktionary-latest-pages-articles.xml.bz2",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sha256": null,
+      "retrievedAt": null,
+      "comment": "~111 MB compressed. Source of el-κλίσ-* verb stem tuples, el-κλίση-* declension classes, ΔΦΑ pronunciation and συλλ syllabification."
+    }
+  }
+}

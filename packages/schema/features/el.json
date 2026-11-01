@@ -1,0 +1,136 @@
+{
+  "lang": "el",
+  "name": "Modern Greek",
+  "endonym": "Ελληνικά",
+  "script": "Grek",
+  "pos": ["verb", "noun", "adj"],
+  "axes": {
+    "aspect": {
+      "label": { "el": "Όψη", "en": "Aspect" },
+      "values": {
+        "IPFV": { "el": "ατέλειτος", "en": "imperfective" },
+        "PFV": { "el": "τέλειος", "en": "perfective" },
+        "PRF": { "el": "συντελεσμένος", "en": "perfect" }
+      }
+    },
+    "tense": {
+      "label": { "el": "Χρόνος", "en": "Tense" },
+      "values": {
+        "PRS": { "el": "ενεστώτας", "en": "present" },
+        "PST": { "el": "παρελθόν", "en": "past" },
+        "FUT": { "el": "μέλλοντας", "en": "future" },
+        "SBJV": { "el": "συντακτικός", "en": "subjunctive" },
+        "IMP": { "el": "προστακτικός", "en": "imperative" }
+      }
+    },
+    "person": {
+      "label": { "el": "Πρόσωπο", "en": "Person" },
+      "values": {
+        "1": { "el": "α΄", "en": "1st" },
+        "2": { "el": "β΄", "en": "2nd" },
+        "3": { "el": "γ΄", "en": "3rd" }
+      }
+    },
+    "number": {
+      "label": { "el": "Αριθμός", "en": "Number" },
+      "values": {
+        "SG": { "el": "ενικός", "en": "singular" },
+        "PL": { "el": "πληθυντικός", "en": "plural" },
+        "DU": { "el": "δυϊκός", "en": "dual" }
+      }
+    },
+    "case": {
+      "label": { "el": "Πτώση", "en": "Case" },
+      "values": {
+        "NOM": { "el": "ονομαστική", "en": "nominative" },
+        "GEN": { "el": "γενική", "en": "genitive" },
+        "ACC": { "el": "αιτιατική", "en": "accusative" },
+        "VOC": { "el": "κλητική", "en": "vocative" }
+      }
+    },
+    "gender": {
+      "label": { "el": "Γένος", "en": "Gender" },
+      "values": {
+        "MASC": { "el": "αρσενικό", "en": "masculine" },
+        "FEM": { "el": "θηλυκό", "en": "feminine" },
+        "NEUT": { "el": "ουδέτερο", "en": "neuter" }
+      }
+    },
+    "degree": {
+      "label": { "el": "Βαθμός", "en": "Degree" },
+      "values": {
+        "AB": { "el": "θετικός", "en": "positive" },
+        "CMPR": { "el": "συγκριτικός", "en": "comparative" },
+        "SPRL": { "el": "υπερθετικός", "en": "superlative" }
+      }
+    },
+    "voice": {
+      "label": { "el": "Φωνή", "en": "Voice" },
+      "values": {
+        "ACT": { "el": "ενεργητική", "en": "active" },
+        "MIDPASS": { "el": "μέση/παθητική", "en": "middle/passive" }
+      }
+    }
+  },
+  "grids": {
+    "verb": {
+      "groupBy": ["aspect", "tense"],
+      "columns": ["person", "number"],
+      "nonFinite": ["PTCP", "NFIN"]
+    },
+    "noun": {
+      "groupBy": ["gender"],
+      "columns": ["case", "number"]
+    },
+    "adj": {
+      "groupBy": ["degree", "gender"],
+      "columns": ["case", "number"]
+    }
+  },
+  "tenseLabels": {
+    "IPFV;PRS": { "el": "Ενεστώτας", "en": "Present" },
+    "IPFV;PST": { "el": "Αόριστος", "en": "Imperfect (continuous past)" },
+    "IPFV;FUT": { "el": "Μέλλοντας εξακολουθητικός", "en": "Continuous future" },
+    "IPFV;SBJV": { "el": "Συντακτικός ενεστώτα", "en": "Present subjunctive" },
+    "IPFV;IMP": { "el": "Προστακτικός ενεστώτα", "en": "Present imperative" },
+    "PFV;PRS": { "el": "Υποτακτική αορίστου", "en": "Aorist subjunctive stem" },
+    "PFV;PST": { "el": "Στιγμιαίος", "en": "Simple past (perfective)" },
+    "PFV;FUT": { "el": "Μέλλοντας στιγμιαίος", "en": "Simple future" },
+    "PFV;SBJV": { "el": "Συντακτικός αορίστου", "en": "Aorist subjunctive" },
+    "PFV;IMP": { "el": "Προστακτικός αορίστου", "en": "Aorist imperative" },
+    "PRF;PRS": { "el": "Παρακείμενος", "en": "Present perfect" },
+    "PRF;PST": { "el": "Υπερσυντέλικος", "en": "Past perfect" },
+    "PRF;FUT": { "el": "Μέλλοντας συντελεσμένος", "en": "Future perfect" },
+    "PRF;SBJV": { "el": "Συντακτικός παρακειμένου", "en": "Perfect subjunctive" }
+  },
+  "teachingNotes": {
+    "IPFV;PST|PFV;PST": {
+      "el": "Προσοχή: ο Αόριστος είναι ο ατέλειτος παρελθοντικός (έγραφα), ο Στιγμιαίος ο τέλειος (έγραψα).",
+      "en": "Careful: Aoristos is the imperfective past (έγραφα); Stigmiaios is the perfective past (έγραψα). Most learners invert these."
+    }
+  },
+  "search": {
+    "stripCombining": true,
+    "finalSigmaFold": true,
+    "folds": [
+      ["μπ", "β"],
+      ["ντ", "δ"],
+      ["γκ", "γ"],
+      ["γγ", "γ"],
+      ["τσ", "τζ"],
+      ["ου", "υ"],
+      ["ει", "ι"],
+      ["οι", "ι"],
+      ["η", "ι"],
+      ["ω", "ο"],
+      ["αι", "ε"],
+      ["υι", "ι"]
+    ],
+    "romanization": {
+      "a": "α", "b": "μπ", "v": "β", "g": "γ", "d": "δ", "e": "ε", "z": "ζ",
+      "i": "ι", "th": "θ", "k": "κ", "l": "λ", "m": "μ", "n": "ν", "x": "ξ",
+      "o": "ο", "p": "π", "r": "ρ", "s": "σ", "t": "τ", "y": "υ", "f": "φ",
+      "h": "χ", "ps": "ψ", "u": "ου", "w": "ω"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+# High-frequency Modern Greek lemmas used as a coverage alarm.
+# A data source that lacks these is not usable as the primary spine.
+γράφω
+σκύλος
+δρόμος
+άνθρωπος
+καλός
+παιδί
+μητέρα
+που
+θέλω
+βλέπω
+πίνω
+τρώω
+είμαι
+έχω
+κάνω
+λέω
+παίρνω
+δένω
+νερό
+σπίτι
+γυναίκα
+άντρας
+δροσίζω
+μαγκιά

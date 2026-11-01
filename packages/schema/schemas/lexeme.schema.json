@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://klisi.dev/schema/lexeme.schema.json",
+  "title": "Klisi lexeme",
+  "type": "object",
+  "required": ["id", "lang", "lemma", "pos", "source"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z]{2,3}:[a-z]+:.+$",
+      "description": "Stable id: <lang>:<pos>:<lemma>"
+    },
+    "lang": { "type": "string", "pattern": "^[a-z]{2,3}$" },
+    "lemma": { "type": "string", "minLength": 1 },
+    "pos": { "type": "string", "minLength": 1 },
+    "class": {
+      "type": ["string", "null"],
+      "description": "Conjugation or declension class, e.g. δένω or δρόμος"
+    },
+    "gender": { "type": ["string", "null"] },
+    "stems": {
+      "type": ["object", "null"],
+      "description": "Stem tuple. Verbs: present/aorist/participle. Nouns: stem variants.",
+      "additionalProperties": { "type": ["string", "array"] }
+    },
+    "irregular": {
+      "type": ["boolean", "null"],
+      "description": "Derived: true when the aorist stem is not derivable from the present stem by the class rules"
+    },
+    "senses": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "object",
+        "required": ["gloss"],
+        "additionalProperties": false,
+        "properties": {
+          "gloss": { "type": "string" },
+          "tags": { "type": ["array", "null"], "items": { "type": "string" } },
+          "translations": {
+            "type": ["array", "null"],
+            "items": {
+              "type": "object",
+              "required": ["lang", "text"],
+              "additionalProperties": false,
+              "properties": {
+                "lang": { "type": "string" },
+                "text": { "type": "string" }
+              }
+            }
+          },
+          "examples": {
+            "type": ["array", "null"],
+            "items": {
+              "type": "object",
+              "required": ["text"],
+              "additionalProperties": false,
+              "properties": {
+                "text": { "type": "string" },
+                "translation": { "type": ["string", "null"] },
+                "ref": { "type": ["string", "null"] }
+              }
+            }
+          }
+        }
+      }
+    },
+    "links": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "object",
+        "required": ["type", "target"],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["voice", "translation", "variant", "related"]
+          },
+          "target": { "type": "string" }
+        }
+      }
+    },
+    "ipa": { "type": ["string", "null"] },
+    "romanization": { "type": ["string", "null"] },
+    "syllabification": { "type": ["string", "null"] },
+    "reviewed": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "by": { "type": "string" },
+        "at": { "type": "string", "format": "date" }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "ref": { "type": ["string", "null"] },
+        "license": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

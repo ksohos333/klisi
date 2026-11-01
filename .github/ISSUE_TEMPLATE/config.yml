@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Search problem
+    url: https://github.com/ksohos333/klisi/issues/new
+    about: "Typed something, got the wrong lemma? Open an issue with what you typed and what you expected."

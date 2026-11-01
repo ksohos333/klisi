@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://klisi.dev/schema/paradigm.schema.json",
+  "title": "Klisi paradigm",
+  "type": "object",
+  "required": ["lemmaId", "grid", "cells"],
+  "additionalProperties": false,
+  "properties": {
+    "lemmaId": { "type": "string" },
+    "grid": {
+      "type": "object",
+      "required": ["groupBy", "columns"],
+      "additionalProperties": false,
+      "properties": {
+        "groupBy": { "type": "array", "items": { "type": "string" } },
+        "columns": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "cells": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["features", "forms"],
+        "additionalProperties": false,
+        "properties": {
+          "features": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "forms": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "All accepted variants. Index 0 is the primary (Ministry-conventional) form."
+          },
+          "absent": {
+            "type": ["boolean", "null"],
+            "description": "true when this cell is linguistically absent, as opposed to missing data"
+          },
+          "note": { "type": ["string", "null"] },
+          "irregular": { "type": ["boolean", "null"] },
+          "reviewed": {
+            "type": ["object", "null"],
+            "additionalProperties": false,
+            "properties": {
+              "by": { "type": "string" },
+              "at": { "type": "string", "format": "date" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

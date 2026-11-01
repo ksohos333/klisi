@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "description": "Golden vectors for packages/spec/search.md. Every client implementation must pass these unchanged.",
+  "index": [
+    { "lemmaId": "el:verb:γράφω", "lang": "el", "surface": "γράφω", "romanization": "grafo", "ipa": "ˈɣra.fo" },
+    { "lemmaId": "el:verb:γράφω", "lang": "el", "surface": "γράφεις", "romanization": "grafeis" },
+    { "lemmaId": "el:verb:γράφω", "lang": "el", "surface": "έγραψα", "romanization": "egrapsa" },
+    { "lemmaId": "el:verb:γράφομαι", "lang": "el", "surface": "γράφομαι", "romanization": "grafomai", "ipa": "ˈɣra.fo.me" },
+    { "lemmaId": "el:verb:μπαίνω", "lang": "el", "surface": "μπαίνω", "romanization": "baino", "ipa": "ˈbe.no" },
+    { "lemmaId": "el:verb:βαίνω", "lang": "el", "surface": "βαίνω", "romanization": "vaino", "ipa": "ˈve.no" },
+    { "lemmaId": "el:noun:σκύλος", "lang": "el", "surface": "σκύλος", "romanization": "skilos", "ipa": "ˈsci.los" },
+    { "lemmaId": "el:noun:άνθρωπος", "lang": "el", "surface": "άνθρωπος", "romanization": "anthropos" },
+    { "lemmaId": "el:noun:δρόμος", "lang": "el", "surface": "δρόμος" },
+    { "lemmaId": "el:noun:μητέρα", "lang": "el", "surface": "μητέρα", "romanization": "mitera" },
+    { "lemmaId": "el:noun:παιδί", "lang": "el", "surface": "παιδί", "romanization": "pedi" },
+    { "lemmaId": "el:particle:που", "lang": "el", "surface": "που", "romanization": "pu" },
+    { "lemmaId": "en:verb:write", "lang": "en", "surface": "write" },
+    { "lemmaId": "en:verb:go", "lang": "en", "surface": "go" },
+    { "lemmaId": "en:noun:child", "lang": "en", "surface": "child" },
+    { "lemmaId": "en:noun:child", "lang": "en", "surface": "children" }
+  ],
+  "cases": [
+    {
+      "id": "exact-native-lemma",
+      "lang": "el",
+      "query": "γράφω",
+      "expectStage": 1,
+      "expectLemmas": ["el:verb:γράφω"],
+      "expectFirst": "el:verb:γράφω",
+      "note": "Exact match must not also return prefix neighbours."
+    },
+    {
+      "id": "exact-inflected-form-resolves-to-lemma",
+      "lang": "el",
+      "query": "έγραψα",
+      "expectStage": 1,
+      "expectLemmas": ["el:verb:γράφω"],
+      "note": "An inflected form resolves to its lemma."
+    },
+    {
+      "id": "case-insensitive",
+      "lang": "el",
+      "query": "ΓΡΑΦΩ",
+      "expectStage": 2,
+      "expectLemmas": ["el:verb:γράφω"]
+    },
+    {
+      "id": "accent-stripped",
+      "lang": "el",
+      "query": "γραφω",
+      "expectStage": 2,
+      "expectLemmas": ["el:verb:γράφω"]
+    },
+    {
+      "id": "accent-stripped-inflected",
+      "lang": "el",
+      "query": "εγραψα",
+      "expectStage": 2,
+      "expectLemmas": ["el:verb:γράφω"]
+    },
+    {
+      "id": "final-sigma-fold",
+      "lang": "el",
+      "query": "δρομος",
+      "expectStage": 2,
+      "expectLemmas": ["el:noun:δρόμος"],
+      "note": "ς and σ unify after normalization."
+    },
+    {
+      "id": "fold-omega-omicron",
+      "lang": "el",
+      "query": "γραφο",
+      "expectStage": 3,
+      "expectLemmas": ["el:verb:γράφω"],
+      "note": "ω/ο confusion is a classic heard-spelling error."
+    },
+    {
+      "id": "fold-eta-iota",
+      "lang": "el",
+      "query": "μιτερα",
+      "expectStage": 3,
+      "expectLemmas": ["el:noun:μητέρα"]
+    },
+    {
+      "id": "fold-ou-ypsilon",
+      "lang": "el",
+      "query": "πυ",
+      "expectStage": 3,
+      "expectLemmas": ["el:particle:που"]
+    },
+    {
+      "id": "fold-missing-omega",
+      "lang": "el",
+      "query": "ανθροποσ",
+      "expectStage": 3,
+      "expectLemmas": ["el:noun:άνθρωπος"]
+    },
+    {
+      "id": "fold-digraph-collision-returns-all",
+      "lang": "el",
+      "query": "βενω",
+      "expectStage": 3,
+      "expectLemmas": ["el:verb:μπαίνω", "el:verb:βαίνω"],
+      "note": "μπ and β fold together, so both candidates must be returned (Rule 3)."
+    },
+    {
+      "id": "romanization-field",
+      "lang": "el",
+      "query": "skilos",
+      "expectStage": 4,
+      "expectLemmas": ["el:noun:σκύλος"]
+    },
+    {
+      "id": "romanization-field-verb",
+      "lang": "el",
+      "query": "grafo",
+      "expectStage": 4,
+      "expectLemmas": ["el:verb:γράφω"]
+    },
+    {
+      "id": "transliteration-greedy-longest-match",
+      "lang": "el",
+      "query": "dromos",
+      "expectStage": 4,
+      "expectLemmas": ["el:noun:δρόμος"]
+    },
+    {
+      "id": "transliteration-th-digraph",
+      "lang": "el",
+      "query": "anthropos",
+      "expectStage": 4,
+      "expectLemmas": ["el:noun:άνθρωπος"],
+      "note": "th must transliterate as θ, not τ+χ."
+    },
+    {
+      "id": "ipa-exact",
+      "lang": "el",
+      "query": "ˈsci.los",
+      "expectStage": 5,
+      "expectLemmas": ["el:noun:σκύλος"]
+    },
+    {
+      "id": "fuzzy-double-letter",
+      "lang": "el",
+      "query": "σκυλλος",
+      "expectStage": 6,
+      "expectLemmas": ["el:noun:σκύλος"]
+    },
+    {
+      "id": "fuzzy-trailing-letter",
+      "lang": "el",
+      "query": "παιδιι",
+      "expectStage": 6,
+      "expectLemmas": ["el:noun:παιδί"]
+    },
+    {
+      "id": "prefix-search-as-you-type",
+      "lang": "el",
+      "query": "γρα",
+      "expectStage": 7,
+      "expectLemmas": ["el:verb:γράφω", "el:verb:γράφομαι"],
+      "expectFirst": "el:verb:γράφω"
+    },
+    {
+      "id": "no-match-garbage",
+      "lang": "el",
+      "query": "zzzzz",
+      "expectStage": 0,
+      "expectLemmas": []
+    },
+    {
+      "id": "no-cross-language-leak",
+      "lang": "el",
+      "query": "write",
+      "expectStage": 0,
+      "expectLemmas": [],
+      "note": "Rule 4: results never silently mix languages."
+    },
+    {
+      "id": "english-exact",
+      "lang": "en",
+      "query": "write",
+      "expectStage": 1,
+      "expectLemmas": ["en:verb:write"]
+    },
+    {
+      "id": "english-case-insensitive",
+      "lang": "en",
+      "query": "WRITE",
+      "expectStage": 2,
+      "expectLemmas": ["en:verb:write"]
+    },
+    {
+      "id": "english-irregular-plural-resolves-to-lemma",
+      "lang": "en",
+      "query": "children",
+      "expectStage": 1,
+      "expectLemmas": ["en:noun:child"]
+    },
+    {
+      "id": "english-greek-query-no-match",
+      "lang": "en",
+      "query": "γράφω",
+      "expectStage": 0,
+      "expectLemmas": []
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Spec golden vectors and schema tests
+        run: pnpm test
+
+      - name: No telemetry, no third-party runtime calls
+        # The privacy promise is a build-time property, not a policy page.
+        run: |
+          if grep -RInE --include='*.ts' --include='*.tsx' --include='*.js' \
+            -e 'google-analytics' -e 'googletagmanager' -e 'mixpanel' -e 'segment\.io' \
+            -e 'sentry\.io' -e 'posthog' -e 'hotjar' -e 'plausible\.io' \
+            packages pipeline apps 2>/dev/null; then
+            echo "telemetry reference found"; exit 1
+          fi
+          echo "no telemetry references"
+
+      - name: No generated data committed
+        run: |
+          # Hand-authored corrections and golden vectors are source, not generated data.
+          if git ls-files | grep -E '\.(jsonl|raw|xml\.bz2)$' | grep -vE '^(corrections/|pipeline/sources)'; then
+            echo "generated or raw data must not be committed"; exit 1
+          fi
+          echo "no generated data in the tree"

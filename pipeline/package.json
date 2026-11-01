@@ -1,0 +1,20 @@
+{
+  "name": "@klisi/pipeline",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test src/*.test.ts",
+    "pipeline": "tsx src/cli.ts"
+  },
+  "dependencies": {
+    "@klisi/schema": "workspace:*",
+    "@klisi/spec": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://klisi.dev/schema/manifest.schema.json",
+  "title": "Klisi artifact manifest",
+  "type": "object",
+  "required": ["schemaVersion", "lang", "buildId", "createdAt", "files", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 1 },
+    "lang": { "type": "string", "pattern": "^[a-z]{2,3}$" },
+    "buildId": { "type": "string" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256", "bytes"],
+        "additionalProperties": false,
+        "properties": {
+          "path": { "type": "string" },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "bytes": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "url", "license"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "url": { "type": "string" },
+          "license": { "type": "string" },
+          "sha256": { "type": ["string", "null"] },
+          "retrievedAt": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "counts": {
+      "type": ["object", "null"],
+      "additionalProperties": { "type": "integer" }
+    }
+  }
+}
